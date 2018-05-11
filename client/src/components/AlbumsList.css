@@ -1,0 +1,49 @@
+svg {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  margin: 2em auto;
+}
+
+.albumSpace {
+  width: auto;
+  margin: 0 auto 1em auto;
+}
+
+.album {
+  background-color: #f2d4c2;
+  margin: 1em auto 0 auto;
+  border-radius: 10px;
+  height: auto;
+}
+
+.header {
+  padding: 1em 2em;
+  margin: 0;
+}
+
+@media screen and (max-width: 450px) {
+  .albumSpace {
+    margin: 0 auto 0.5em auto;
+  }
+
+  .header {
+    padding: 0 1em;
+  }
+
+  .container {
+    padding: 0.2em 0.2em 0 0.2em;
+  }
+
+  .album {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0.2em;
+  }
+
+  h5, h6 {
+    text-align: justify;
+  }
+}

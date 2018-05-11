@@ -1,0 +1,33 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1em;
+  background-color: #222222;
+  color: #f2d4c2;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+a, a:hover, a:focus {
+  color: #c06046;
+}
+
+.footer {
+  margin: 0.2em auto;
+  text-align: center;
+}
+
+small {
+  margin: 0.5em auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    margin: 0 auto;
+  }
+}

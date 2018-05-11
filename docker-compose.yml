@@ -1,0 +1,47 @@
+version: '2.1'
+
+services:
+
+  albums-db:
+    container_name: albums-db
+    build: ./project/db
+    ports:
+        - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: exit 0
+
+  albums-service:
+    container_name: albums-service
+    build: .
+    ports:
+      - 5001:5000
+    environment:
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@albums-db:5432/albums_test
+    depends_on:
+      albums-db:
+        condition: service_healthy
+    volumes:
+      - /home/polina/projects/xperiments/flask-photoalbum:/usr/src/app
+    links:
+      - albums-db
+
+  web-service:
+    container_name: web-service
+    build:
+      context: ./client
+      args:
+        - NODE_ENV=development
+    volumes:
+      - './client/:/usr/src/app/flask-photoalbum'
+    ports:
+      - '9000:9000'
+    depends_on:
+      albums-service:
+        condition: service_started
+    links:
+      - albums-service

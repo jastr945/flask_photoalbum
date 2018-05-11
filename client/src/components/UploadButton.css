@@ -1,0 +1,21 @@
+.formOpener {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2.5em;
+  margin: 1em auto;
+  border-radius: 8px;
+  padding: 0.5em 1em;
+  background-color: #B38481;
+  color: #FFFFFF;
+}
+
+.formOpener:hover {
+  background-color: #c06046;
+}
+
+@media screen and (max-width: 500px) {
+  .formOpener {
+    font-size: 2em;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+}

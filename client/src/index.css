@@ -1,0 +1,31 @@
+.app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.jumbotron {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 45vh;
+}
+
+.jumbo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+
+@media screen and (max-width: 900px) {
+  .jumbotron {
+    height: auto;
+  }
+}

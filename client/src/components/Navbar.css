@@ -1,0 +1,36 @@
+.navbar {
+  margin-bottom: 0;
+  height: auto;
+  padding: 0.5em 2em 0.5em 0.5em;
+}
+
+.navbar-brand {
+  font-size: 2em;
+}
+
+.navbar-right {
+  font-size: 1.5em;
+}
+
+
+@media screen and (max-width: 600px) {
+  .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .navbar {
+    padding: 0.2em 0 0.2em 0.2em;
+  }
+
+  .navbar-brand {
+    font-size: 1.3em;
+    padding-right: 0;
+    padding-left: 0.2em;
+  }
+
+  .navbar-right {
+    font-size: 1.1em;
+  }
+}

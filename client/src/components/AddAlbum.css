@@ -1,0 +1,55 @@
+@keyframes appear {
+    0% {
+      opacity: 0;
+      transform:scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform:scale(1);
+    }
+  }
+
+form {
+  font-family: 'Ubuntu', sans-serif;
+  padding: 1.5em 2.5em;
+  border-radius: 2px;
+  background-color: rgba(179, 132, 129, 0.5);
+  animation: appear 1s forwards;
+}
+
+.btn-primary {
+  background-color: #B38481;
+  font-size: 2em;
+  border-color: #cf6f55;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:visited, .btn-primary:active:focus {
+  background-color: #cf6f55;
+  border-color: #c06046;
+}
+
+.inputfile {
+	height: auto;
+}
+
+.loginError {
+  padding: 0.5em;
+  text-align: center;
+  background-color: #cf6f55;
+  color: #FFFFFF;
+  font-size: 2em;
+}
+
+@media screen and (max-width: 500px) {
+  form {
+    padding: 0.5em 1em;
+  }
+
+  .inputfile {
+  	font-size: 1.1em;
+  }
+
+  .btn-primary {
+    font-size: 1.5em;
+  }
+}
