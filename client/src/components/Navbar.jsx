@@ -19,7 +19,10 @@ class Header extends Component  {
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
     .then((res) => {
-    console.log(res);
+    this.setState({
+    useremail: res.data.data.email,
+    userpic: res.data.data.pic});
+    console.log(res.data.data);
      })
     .catch((err) => { console.log(err); })
   }
