@@ -17,10 +17,9 @@ class Header extends Component  {
     this.logout = this.logout.bind(this);
   }
   getUsers() {
-    axios.get('http://slider.mee.how:5001/login/authorized')
+    axios.get('http://slider.mee.how:5001/googleauthorized')
     .then((res) => {
-    this.setState({ albums: res.data });
-    console.log('user info called');
+    console.log(res);
      })
     .catch((err) => { console.log(err); })
   }
@@ -29,20 +28,23 @@ class Header extends Component  {
     var accessCode = response.code;
     const config2 = {
       headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Authorization',
+        'Access-Control-Allow-Methods': 'POST',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Bearer ' + accessCode,
         'mode': 'no-cors'
       }
     }
     console.log(config2);
-    axios.post('http://slider.mee.how:5001/login/authorized', config2)
+    axios.post('http://slider.mee.how:5001/google', config2)
     .then((res) => {
       console.log('access code sent');
+      this.getUsers();
     })
     .catch((err) => {
       console.log(err);
     });
-    this.getUsers();
   }
   logout = () => {
     console.log('logout');

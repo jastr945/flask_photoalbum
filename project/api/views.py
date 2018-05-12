@@ -40,7 +40,7 @@ def index():
     return render_template('index.html', albums=albums)
 
 
-@albums_blueprint.route('/login/authorized', methods=['POST'])
+@albums_blueprint.route('/google', methods=['POST'])
 def add_code():
     """Receiving the access code from the Client and storing it"""
     access_code = json.loads(request.data)['headers']['Authorization'] # obtaining the access code from Client
@@ -50,33 +50,41 @@ def add_code():
             'message': 'Invalid payload.'
         }
         return jsonify(response_object), 400
-    storage.put(access_code)
-    response_object = {
-        'status': 'success',
-        'message': 'New code was added!'
-    }
-    return jsonify(response_object), 200
-
-
-@albums_blueprint.route('/login/authorized', methods=['GET'])
-def authorized():
-    """Decoding the access code and grabbing user data"""
-    access_code = storage.get()
-    import ipdb; ipdb.set_trace()
     flow = OAuth2WebServerFlow(client_id='418257197191-75oafj28gkn84pj7ebgvt54av0vtt7br.apps.googleusercontent.com',
                                client_secret='WFVzMZNMObdCcc1WjD-ifALs',
                                scope='profile',
                                redirect_uri='http://slider.mee.how:9000')
-    credentials = flow.step2_exchange(access_code.code[7:]) # exchanging access code for token
-    email = credentials.id_token['email']
-    pic = credentials.id_token['picture']
+    credentials = flow.step2_exchange(access_code[7:]) # exchanging access code for token
+    storage.put(credentials)
     response_object = {
         'status': 'success',
-        'data': {
-            'email': email,
-            'pic': pic
-        }
+        'message': 'Login credentials were obtained!'
     }
+    return jsonify(response_object), 200
+
+
+@albums_blueprint.route('/googleauthorized', methods=['GET'])
+def authorized():
+    """Decoding the access code and grabbing user data"""
+    credentials = storage.get()
+    if credentials:
+        email = credentials.id_token['email']
+        pic = credentials.id_token['picture']
+        response_object = {
+            'status': 'success',
+            'data': {
+                'email': email,
+                'pic': pic
+            }
+        }
+    else:
+        response_object = {
+            'status': 'success',
+            'data': {
+                'email': '',
+                'pic': ''
+            }
+        }
     return jsonify(response_object), 200
 
 
