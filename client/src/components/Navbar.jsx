@@ -6,7 +6,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import './Navbar.css';
 
 
-class Header extends Component  {
+class Header extends Component {
   constructor() {
     super()
     this.state = {
@@ -53,10 +53,16 @@ class Header extends Component  {
     });
   }
   logout = () => {
-    console.log('logout');
+    axios.get('http://slider.mee.how:5001/googlelogout')
+    .then((res) => {
+    console.log(res);
     this.setState({
       useremail: null,
       userpic: null
+     });
+    })
+    .catch((err) => {
+      console.log(err);
     });
   }
   render() {

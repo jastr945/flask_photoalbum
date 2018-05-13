@@ -28,8 +28,8 @@ storage = Storage('credentials_file')
 
 @albums_blueprint.route('/', methods=['GET', 'POST'])
 def index():
+    """Index page with all albums listed"""
     albums = Album.query.order_by(Album.created_at.desc()).all()
-
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
@@ -78,6 +78,22 @@ def authorized():
             }
         }
     else:
+        response_object = {
+            'status': 'success',
+            'data': {
+                'email': '',
+                'pic': ''
+            }
+        }
+    return jsonify(response_object), 200
+
+
+@albums_blueprint.route('/googlelogout', methods=['GET'])
+def remove_user():
+    """Google logout"""
+    credentials = storage.get()
+    if credentials:
+        storage.delete()
         response_object = {
             'status': 'success',
             'data': {
