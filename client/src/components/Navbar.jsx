@@ -16,6 +16,9 @@ class Header extends Component  {
     this.responseGoogle = this.responseGoogle.bind(this);
     this.logout = this.logout.bind(this);
   }
+  componentDidMount() {
+    this.getUsers();
+  }
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
     .then((res) => {
@@ -61,7 +64,7 @@ class Header extends Component  {
       <Navbar inverse fluid className="navbar">
         <Navbar.Header>
           <Navbar.Brand className="navbar-brand">
-            <a href="#">React + Flask Photo Album</a>
+            <a href="http://slider.mee.how:9000">React + Flask Photo Album</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
