@@ -2,6 +2,8 @@
   margin-bottom: 0;
   height: auto;
   padding: 0.5em 2em 0.5em 0.5em;
+  border-radius: 0px;
+  color: rgb(157, 157, 157);
 }
 
 .navbar-brand {
@@ -12,6 +14,22 @@
   font-size: 1.5em;
 }
 
+.userinfo {
+  margin: 0 0.5em;
+}
+
+.googleButton {
+  color: #222222;
+  background-color: #B38481;
+  border-color: #cf6f55;
+  border-radius: 3px;
+  margin: 0.5em;
+}
+
+.googleButton:hover, .googleButton:focus, .googleButton:active, .googleButton:visited, .googleButton:active:focus {
+  background-color: #cf6f55;
+  border-color: #c06046;
+}
 
 @media screen and (max-width: 600px) {
   .navbar-brand {

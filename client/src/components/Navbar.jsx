@@ -78,8 +78,9 @@ class Header extends Component {
           <Nav pullRight>
             <NavItem eventKey={1} href="https://github.com/jastr945" target="_blank">About</NavItem>
             <NavItem eventKey={2} href="http://polina.mee.how/" target="_blank">Contact</NavItem>
-            {!this.state.useremail && <NavItem eventKey={3}>
+            {!this.state.useremail &&
             <GoogleLogin
+              className="googleButton"
               clientId="418257197191-75oafj28gkn84pj7ebgvt54av0vtt7br.apps.googleusercontent.com"
               buttonText="Login"
               onSuccess={this.responseGoogle}
@@ -89,11 +90,11 @@ class Header extends Component {
               responseType="code"
               prompt="consent"
               isSignedIn
-            />
-            </NavItem>}
-            {this.state.useremail && <NavItem>{this.state.useremail} | <img src={this.state.userpic} height="22px" width="22px"/></NavItem>}
+              style={{}}
+            />}
+            {this.state.useremail && <li className="userinfo"><h4>{this.state.useremail} | <img src={this.state.userpic} height="35px" width="35px"/></h4></li>}
             {this.state.useremail &&
-              <GoogleLogout buttonText="Logout" onLogoutSuccess={this.logout} />}
+              <li><GoogleLogout className="googleButton" buttonText="Logout" onLogoutSuccess={this.logout} style={{}}/></li>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
