@@ -35,6 +35,10 @@
   .navbar-brand {
     font-size: 1.5em;
   }
+
+  .userinfo {
+    font-size: 0.8em;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -50,5 +54,9 @@
 
   .navbar-right {
     font-size: 1.1em;
+  }
+
+  .userinfo {
+    font-size: 0.5em;
   }
 }
