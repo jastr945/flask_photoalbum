@@ -67,7 +67,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <Navbar inverse fluid className="navbar">
+      <Navbar inverse fluid className="navbar" toggleable="lg">
         <Navbar.Header>
           <Navbar.Brand className="navbar-brand">
             <a href="http://slider.mee.how:9000">React + Flask Photo Album</a>
