@@ -18,7 +18,7 @@ class App extends Component {
       description: '',
       file: null,
       formOpened: false,
-      loginErrorVisible: false
+      loginErrorVisible: null
     }
     this.openForm = this.openForm.bind(this);
   }
@@ -70,12 +70,17 @@ class App extends Component {
       formOpened: true
     });
   }
+  loginError(params) {
+    this.setState({
+      loginErrorVisible: params
+    })
+  }
   render() {
     const formOpened = this.state.formOpened;
     var bg = require('./components/static/landscape.jpg')
     return (
       <div className="app">
-        <Header />
+        <Header loginError={this.loginError.bind(this)} />
         <div className="jumbotron"  style ={{backgroundImage: "url("+bg+")"}} >
           <div className="jumbo container">
             {formOpened ? (

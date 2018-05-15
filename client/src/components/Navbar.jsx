@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import PropTypes from 'prop-types';
 
 import './Navbar.css';
 
@@ -22,11 +23,11 @@ class Header extends Component {
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
     .then((res) => {
-    this.setState({
-    useremail: res.data.data.email,
-    userpic: res.data.data.pic});
     console.log(res.data.data);
-     })
+    this.setState({
+      useremail: res.data.data.email,
+      userpic: res.data.data.pic});
+    })
     .catch((err) => { console.log(err); })
   }
   responseGoogle = (response) => {
@@ -65,6 +66,13 @@ class Header extends Component {
       console.log(err);
     });
   }
+  getContent() {
+    if (this.state.useremail == null) {
+      this.props.callback(true);
+    } else {
+      this.props.callback(false);
+    }
+  }
   render() {
     return (
       <Navbar inverse fluid className="navbar" toggleable="lg">
@@ -76,8 +84,8 @@ class Header extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavItem eventKey={1} href="https://github.com/jastr945" target="_blank">About</NavItem>
-            <NavItem eventKey={2} href="http://polina.mee.how/" target="_blank">Contact</NavItem>
+            <NavItem eventKey={1} href="https://github.com/jastr945/flask_photoalbum" target="_blank" rel="noopener noreferrer">About</NavItem>
+            <NavItem eventKey={2} href="http://polina.mee.how/" target="_blank" rel="noopener noreferrer">Contact</NavItem>
             {!this.state.useremail &&
             <GoogleLogin
               className="googleButton"
@@ -92,7 +100,7 @@ class Header extends Component {
               isSignedIn
               style={{}}
             />}
-            {this.state.useremail && <li className="userinfo"><h4>{this.state.useremail} | <img src={this.state.userpic} height="35px" width="35px"/></h4></li>}
+            {this.state.useremail && <li className="userinfo"><h4>{this.state.useremail} | <img src={this.state.userpic} alt="userpic" height="35px" width="35px"/></h4></li>}
             {this.state.useremail &&
               <li><GoogleLogout className="googleButton" buttonText="Logout" onLogoutSuccess={this.logout} style={{}}/></li>}
           </Nav>
@@ -100,6 +108,10 @@ class Header extends Component {
       </Navbar>
     )
   }
+}
+
+Header.protoTypes = {
+  loginError: PropTypes.func,
 }
 
 export default Header;
