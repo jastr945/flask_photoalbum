@@ -11,15 +11,15 @@
 }
 
 .navbar-brand {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 .navbar-right {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 .navbar-right > li > a {
-  padding: 1.3em 0.3em;
+  padding: 0.9em 0.3em;
 }
 
 .userinfo {
@@ -35,7 +35,7 @@
   background-color: #B38481;
   border-color: #cf6f55;
   border-radius: 3px;
-  margin: 1.1em 0.5em;
+  margin: 0.5em;
 }
 
 .googleButton:hover, .googleButton:focus, .googleButton:active, .googleButton:visited, .googleButton:active:focus {
@@ -43,16 +43,33 @@
   border-color: #c06046;
 }
 
+@media screen and (max-width: 1090px) {
+  .navbar-brand {
+    font-size: 1.5em;
+  }
 
-@media screen and (max-width: 450px) {
+  .navbar-right {
+    font-size: 1em;
+  }
+
+  .navbar-right > li > a {
+    padding: 1.3em 0.3em;
+  }
+
+  .googleButton {
+    margin: 1em 0.5em;
+  }
+}
+
+@media screen and (max-width: 756px) {
   .navbar {
-    padding: 0.2em 0 0.2em 0.2em;
+    padding: 0.2em 0.5em 0.2em 0em;
   }
 
   .navbar-brand {
     font-size: 1.3em;
     padding-right: 0;
-    padding-left: 0.2em;
+    padding-left: 0.5em;
   }
 
   .navbar-right {
@@ -64,6 +81,8 @@
   }
 
   .userinfo > h4 {
-    font-size: 0.8em;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
