@@ -36,8 +36,8 @@
     font-size: 1.5em;
   }
 
-  .userinfo {
-    font-size: 0.8em;
+  .userinfo > h4 {
+    font-size: 1em;
   }
 }
 
@@ -56,7 +56,11 @@
     font-size: 1.1em;
   }
 
-  .userinfo {
-    font-size: 0.5em;
+  .navbar-right > li > a {
+    padding-left: 0.5em;
+  }
+
+  .userinfo > h4 {
+    font-size: 0.8em;
   }
 }
