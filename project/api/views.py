@@ -106,47 +106,54 @@ def remove_user():
 
 @albums_blueprint.route('/albums', methods=['POST'])
 def add_album():
-    post_data = request.form
-    if not post_data:
-        response_object = {
-            'status': 'fail',
-            'message': 'Invalid payload.'
-        }
-        return jsonify(response_object), 400
-
-    title = request.form['title']
-    try:
-        album = Album.query.filter_by(title=title).first()
-        if not album:
-            description = request.form['description']
-            new_album = Album(title=title, description=description)
-            new_album.images=[]
-            for i in request.files.getlist('photos'):
-                filename = photos.save(i) # saving images via Flask-Uploads
-                img_url = photos.url(filename) # extracting image url with Flask-Uploads
-                new_image = Image(name=filename, url=img_url)
-                new_album.images.append(new_image) # One-to-many relationship instantiation
-            db.session.add(new_album)
-            db.session.commit()
-            response_object = {
-                'status': 'success',
-                'message': f'{title} was added!'
-            }
-            return jsonify(response_object), 200
-        else:
+    credentials = storage.get()
+    if len(credentials.id_token['email']) > 0:
+        post_data = request.form
+        if not post_data:
             response_object = {
                 'status': 'fail',
-                'message': 'Sorry. That title already exists.'
+                'message': 'Invalid payload.'
             }
             return jsonify(response_object), 400
-    except (exc.IntegrityError, ValueError) as e:
-        db.session().rollback()
+
+        title = request.form['title']
+        try:
+            album = Album.query.filter_by(title=title).first()
+            if not album:
+                description = request.form['description']
+                new_album = Album(title=title, description=description)
+                new_album.images=[]
+                for i in request.files.getlist('photos'):
+                    filename = photos.save(i) # saving images via Flask-Uploads
+                    img_url = photos.url(filename) # extracting image url with Flask-Uploads
+                    new_image = Image(name=filename, url=img_url)
+                    new_album.images.append(new_image) # One-to-many relationship instantiation
+                db.session.add(new_album)
+                db.session.commit()
+                response_object = {
+                    'status': 'success',
+                    'message': f'{title} was added!'
+                }
+                return jsonify(response_object), 200
+            else:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'Sorry. That title already exists.'
+                }
+                return jsonify(response_object), 400
+        except (exc.IntegrityError, ValueError) as e:
+            db.session().rollback()
+            response_object = {
+                'status': 'fail',
+                'message': 'Invalid payload.'
+            }
+            return jsonify(response_object), 400
+    else:
         response_object = {
             'status': 'fail',
-            'message': 'Invalid payload.'
+            'message': 'Unauthorized access. Please log in.'
         }
-        return jsonify(response_object), 400
-
+        return jsonify(response_object), 403
 
 @albums_blueprint.route('/albums', methods=['GET'])
 def get_all_albums():

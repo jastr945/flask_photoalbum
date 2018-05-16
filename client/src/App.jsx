@@ -31,29 +31,31 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
   addAlbum(event) {
-    event.preventDefault();
-    var formData = new FormData();
-    for (let i=0; i < this.state.file.length; i++) {
-      formData.append('photos', this.state.file[i]);
-    }
-    formData.append('title', this.state.title);
-    formData.append('description', this.state.description);
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
+    if (this.state.loginErrorVisible == false) {
+      event.preventDefault();
+      var formData = new FormData();
+      for (let i=0; i < this.state.file.length; i++) {
+        formData.append('photos', this.state.file[i]);
       }
+      formData.append('title', this.state.title);
+      formData.append('description', this.state.description);
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      axios.post('http://slider.mee.how:5001/albums', formData, config)
+      .then((res) => {
+        this.getAlbums();
+        this.setState({ title: '', description: '', file: null });
+        document.getElementById("album-form").reset();
+      })
+      .catch((err) => {
+        if( err.response ){
+          console.log(err.data.message);
+        } else {console.log(err);}
+      })
     }
-    axios.post('http://slider.mee.how:5001/albums', formData, config)
-    .then((res) => {
-      this.getAlbums();
-      this.setState({ title: '', description: '', file: null });
-      document.getElementById("album-form").reset();
-    })
-    .catch((err) => {
-      if( err.response ){
-        console.log(err.data.message);
-      } else {console.log(err);}
-    })
   }
   handleFileChange(event) {
     this.setState({
@@ -78,7 +80,6 @@ class App extends Component {
   render() {
     const formOpened = this.state.formOpened;
     var bg = require('./components/static/landscape.jpg');
-    console.log("loginErrorVisible: " + this.state.loginErrorVisible);
     return (
       <div className="app">
         <Header loginError={this.loginError.bind(this)} />

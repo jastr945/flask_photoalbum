@@ -70,7 +70,6 @@ class Header extends Component {
     });
   }
   checkLogin() {
-    console.log("useremail state: " + this.state.useremail);
     if (this.state.useremail == null || this.state.useremail == '') {
       this.props.loginError(true);
     } else {

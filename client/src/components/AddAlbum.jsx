@@ -46,7 +46,7 @@ const Form = (props) => {
           value="Submit"
         />
       </form>
-      {props.error && <div className="loginError">Please sign in to create your own image galleries</div>}
+      {props.error && <div className="loginError">Please sign in to create your own image gallery</div>}
     </div>
   )
 }
