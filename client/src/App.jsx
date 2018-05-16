@@ -70,9 +70,9 @@ class App extends Component {
       formOpened: true
     });
   }
-  loginError(params) {
+  loginError(val) {
     this.setState({
-      loginErrorVisible: params
+      loginErrorVisible: val
     })
   }
   render() {

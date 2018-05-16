@@ -24,7 +24,6 @@ RUN npm install --save @researchgate/react-intersection-observer
 RUN npm install --save react-bootstrap
 RUN npm i react-loading
 RUN npm install react-google-login
-RUN npm install prop-types
 
 # add app
 ADD . /usr/src/app

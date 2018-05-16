@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import PropTypes from 'prop-types';
 
 import './Navbar.css';
 
@@ -16,10 +15,10 @@ class Header extends Component {
     }
     this.responseGoogle = this.responseGoogle.bind(this);
     this.logout = this.logout.bind(this);
-    this.getContent = this.getContent.bind(this);
   }
   componentDidMount() {
     this.getUsers();
+    this.checkLogin();
   }
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
@@ -27,7 +26,9 @@ class Header extends Component {
     console.log(res.data.data);
     this.setState({
       useremail: res.data.data.email,
-      userpic: res.data.data.pic});
+      userpic: res.data.data.pic
+    });
+    this.checkLogin();
     })
     .catch((err) => { console.log(err); })
   }
@@ -62,13 +63,15 @@ class Header extends Component {
       useremail: null,
       userpic: null
      });
+    this.checkLogin();
     })
     .catch((err) => {
       console.log(err);
     });
   }
-  getContent() {
-    if (this.state.useremail == null) {
+  checkLogin() {
+    console.log("useremail state: " + this.state.useremail);
+    if (this.state.useremail == null || this.state.useremail == '') {
       this.props.loginError(true);
     } else {
       this.props.loginError(false);
@@ -109,10 +112,6 @@ class Header extends Component {
       </Navbar>
     )
   }
-}
-
-Header.protoTypes = {
-  loginError: PropTypes.func,
 }
 
 export default Header;
