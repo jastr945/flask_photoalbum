@@ -28,15 +28,19 @@ storage = Storage('credentials_file')
 
 @albums_blueprint.route('/', methods=['GET', 'POST'])
 def index():
-    """Index page with all albums listed"""
-    albums = Album.query.order_by(Album.created_at.desc()).all()
-    if request.method == 'POST':
-        title = request.form['title']
-        description = request.form['description']
-        album = Album(title=title, description=description)
-        album.images = photos_list
-        db.session.add(album)
-        db.session.commit()
+    """Index page with each user's albums listed. If not signed in, display default albums."""
+    credentials = storage.get()
+    if len(credentials.id_token['email']) > 0:
+        albums = Album.query.filter_by(user_email=credentials.id_token['email'])
+    else:
+        albums = Album.query.filter_by(user_email="example@example.com")
+    # if request.method == 'POST':
+    #     title = request.form['title']
+    #     description = request.form['description']
+    #     album = Album(title=title, description=description)
+    #     album.images = photos_list
+    #     db.session.add(album)
+    #     db.session.commit()
     return render_template('index.html', albums=albums)
 
 
@@ -121,7 +125,7 @@ def add_album():
             album = Album.query.filter_by(title=title).first()
             if not album:
                 description = request.form['description']
-                new_album = Album(title=title, description=description)
+                new_album = Album(title=title, description=description, user_email=credentials.id_token['email'])
                 new_album.images=[]
                 for i in request.files.getlist('photos'):
                     filename = photos.save(i) # saving images via Flask-Uploads

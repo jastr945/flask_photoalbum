@@ -10,12 +10,14 @@ class Album(db.Model):
     description = db.Column(db.String(1000), nullable=False)
     images = db.relationship('Image', backref=db.backref('albums', lazy=True))
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
+    user_email = db.Column(db.String(1000), nullable=False)
 
-    def __init__(self, title, description, created_at=None):
+    def __init__(self, title, description, user_email, created_at=None):
         if not created_at:
             created_at = datetime.datetime.now()
         self.title = title
         self.description = description
+        self.user_email = user_email
         self.created_at = created_at
 
 

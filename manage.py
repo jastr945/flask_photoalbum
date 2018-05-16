@@ -28,11 +28,11 @@ def test():
 @manager.command
 def seed_db():
     """Seeds the database."""
-    album1 = Album(title='polina', description="Polina's album with many awesome pictures.")
+    album1 = Album(title='polina', description="Polina's album with many awesome pictures.", user_email="example@example.com")
     img1 = Image(name='pigs3.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/880e033191ca56e1612049fcf76565b7a8377911/subscriber/coffee5.jpg')
     img2 = Image(name='pigs4.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/880e033191ca56e1612049fcf76565b7a8377911/subscriber/coffee2.jpg')
 
-    album2 = Album(title='pofi', description="Pofi's cute pictures.")
+    album2 = Album(title='pofi', description="Pofi's cute pictures.", user_email="example@example.com")
     img3 = Image(name='pigs7.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/880e033191ca56e1612049fcf76565b7a8377911/subscriber/coffee.jpg')
     img4 = Image(name='pigs8.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/880e033191ca56e1612049fcf76565b7a8377911/subscriber/coffee4.jpg')
 
