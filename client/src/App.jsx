@@ -31,8 +31,8 @@ class App extends Component {
     .catch((err) => { console.log(err); })
   }
   addAlbum(event) {
+    event.preventDefault();
     if (this.state.loginErrorVisible == false) {
-      event.preventDefault();
       var formData = new FormData();
       for (let i=0; i < this.state.file.length; i++) {
         formData.append('photos', this.state.file[i]);
@@ -55,6 +55,11 @@ class App extends Component {
           console.log(err.data.message);
         } else {console.log(err);}
       })
+    } else {
+      console.log("Unauthorized request. Please log in.");
+      this.setState({
+        formOpened: true
+      });
     }
   }
   handleFileChange(event) {

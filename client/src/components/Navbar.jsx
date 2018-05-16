@@ -23,7 +23,6 @@ class Header extends Component {
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
     .then((res) => {
-    console.log(res.data.data);
     this.setState({
       useremail: res.data.data.email,
       userpic: res.data.data.pic
@@ -93,7 +92,7 @@ class Header extends Component {
             <GoogleLogin
               className="googleButton"
               clientId="418257197191-75oafj28gkn84pj7ebgvt54av0vtt7br.apps.googleusercontent.com"
-              buttonText="Login"
+              buttonText="Login with Google"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}
               offline={true}
