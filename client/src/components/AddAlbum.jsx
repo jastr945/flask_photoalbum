@@ -4,6 +4,7 @@ import './AddAlbum.css';
 
 
 const Form = (props) => {
+  console.log("login error" + props.error);
   return (
     <div className="col-md-6">
       <form id="album-form" onSubmit={(event) => props.addAlbum(event)} method="POST" encType="multipart/form-data">
@@ -45,7 +46,7 @@ const Form = (props) => {
           value="Submit"
         />
       </form>
-      { props.error && <div className="loginError">Please sign in</div>}
+      {props.error && <div className="loginError">Please sign in to create your own image galleries</div>}
     </div>
   )
 }

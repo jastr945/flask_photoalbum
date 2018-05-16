@@ -77,7 +77,8 @@ class App extends Component {
   }
   render() {
     const formOpened = this.state.formOpened;
-    var bg = require('./components/static/landscape.jpg')
+    var bg = require('./components/static/landscape.jpg');
+    console.log("loginErrorVisible: " + this.state.loginErrorVisible);
     return (
       <div className="app">
         <Header loginError={this.loginError.bind(this)} />

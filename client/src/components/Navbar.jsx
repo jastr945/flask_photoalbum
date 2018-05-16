@@ -16,6 +16,7 @@ class Header extends Component {
     }
     this.responseGoogle = this.responseGoogle.bind(this);
     this.logout = this.logout.bind(this);
+    this.getContent = this.getContent.bind(this);
   }
   componentDidMount() {
     this.getUsers();
@@ -68,9 +69,9 @@ class Header extends Component {
   }
   getContent() {
     if (this.state.useremail == null) {
-      this.props.callback(true);
+      this.props.loginError(true);
     } else {
-      this.props.callback(false);
+      this.props.loginError(false);
     }
   }
   render() {
