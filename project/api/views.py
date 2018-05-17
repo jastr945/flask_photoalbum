@@ -28,20 +28,8 @@ storage = Storage('credentials_file')
 
 @albums_blueprint.route('/', methods=['GET', 'POST'])
 def index():
-    """Index page with each user's albums listed. If not signed in, display default albums."""
-    credentials = storage.get()
-    if credentials and len(credentials.id_token['email']) > 0:
-        albums = Album.query.filter_by(user_email=credentials.id_token['email'])
-    else:
-        albums = Album.query.filter_by(user_email="example@example.com")
-    # if request.method == 'POST':
-    #     title = request.form['title']
-    #     description = request.form['description']
-    #     album = Album(title=title, description=description)
-    #     album.images = photos_list
-    #     db.session.add(album)
-    #     db.session.commit()
-    return render_template('index.html', albums=albums)
+    """Index page."""
+    return render_template('index.html')
 
 
 @albums_blueprint.route('/google', methods=['POST'])
@@ -164,10 +152,9 @@ def get_all_albums():
     """Get all albums"""
     credentials = storage.get()
     if credentials and len(credentials.id_token['email']) > 0:
-        albums = Album.query.filter_by(user_email=credentials.id_token['email'])
+        albums = Album.query.filter_by(user_email=credentials.id_token['email']).order_by(Album.created_at.desc())
     else:
-        albums = Album.query.filter_by(user_email="example@example.com")
-    # albums = Album.query.order_by(Album.created_at.desc()).all()
+        albums = Album.query.filter_by(user_email="example@example.com").order_by(Album.created_at.desc())
     albums_list = []
     for album in albums:
         album_object = {
