@@ -30,7 +30,7 @@ storage = Storage('credentials_file')
 def index():
     """Index page with each user's albums listed. If not signed in, display default albums."""
     credentials = storage.get()
-    if len(credentials.id_token['email']) > 0:
+    if credentials and len(credentials.id_token['email']) > 0:
         albums = Album.query.filter_by(user_email=credentials.id_token['email'])
     else:
         albums = Album.query.filter_by(user_email="example@example.com")
@@ -162,7 +162,12 @@ def add_album():
 @albums_blueprint.route('/albums', methods=['GET'])
 def get_all_albums():
     """Get all albums"""
-    albums = Album.query.order_by(Album.created_at.desc()).all()
+    credentials = storage.get()
+    if credentials and len(credentials.id_token['email']) > 0:
+        albums = Album.query.filter_by(user_email=credentials.id_token['email'])
+    else:
+        albums = Album.query.filter_by(user_email="example@example.com")
+    # albums = Album.query.order_by(Album.created_at.desc()).all()
     albums_list = []
     for album in albums:
         album_object = {
