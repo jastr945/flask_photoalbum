@@ -87,7 +87,7 @@ class App extends Component {
     var bg = require('./components/static/landscape.jpg');
     return (
       <div className="app">
-        <Header loginError={this.loginError.bind(this)} getAlbums={this.getAlbums()} />
+        <Header loginError={this.loginError.bind(this)} callgetAlbums={this.getAlbums.bind(this)} />
         <div className="jumbotron"  style ={{backgroundImage: "url("+bg+")"}} >
           <div className="jumbo container">
             {formOpened ? (

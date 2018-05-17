@@ -15,10 +15,10 @@ class Header extends Component {
     }
     this.responseGoogle = this.responseGoogle.bind(this);
     this.logout = this.logout.bind(this);
+    this.getUsers = this.getUsers.bind(this);
   }
   componentDidMount() {
     this.getUsers();
-    this.checkLogin();
   }
   getUsers() {
     axios.get('http://slider.mee.how:5001/googleauthorized')
@@ -28,7 +28,7 @@ class Header extends Component {
       userpic: res.data.data.pic
     });
     this.checkLogin();
-    this.props.getAlbums;
+    this.props.callgetAlbums();
     })
     .catch((err) => { console.log(err); })
   }
@@ -58,11 +58,7 @@ class Header extends Component {
   logout = () => {
     axios.get('http://slider.mee.how:5001/googlelogout')
     .then((res) => {
-    this.setState({
-      useremail: null,
-      userpic: null
-     });
-    this.checkLogin();
+      this.getUsers();
     })
     .catch((err) => {
       console.log(err);
