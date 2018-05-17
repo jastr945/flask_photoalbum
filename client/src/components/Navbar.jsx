@@ -28,6 +28,7 @@ class Header extends Component {
       userpic: res.data.data.pic
     });
     this.checkLogin();
+    this.props.getAlbums;
     })
     .catch((err) => { console.log(err); })
   }
@@ -57,7 +58,6 @@ class Header extends Component {
   logout = () => {
     axios.get('http://slider.mee.how:5001/googlelogout')
     .then((res) => {
-    console.log(res);
     this.setState({
       useremail: null,
       userpic: null
@@ -69,7 +69,7 @@ class Header extends Component {
     });
   }
   checkLogin() {
-    if (this.state.useremail == null || this.state.useremail == '') {
+    if (this.state.useremail === null || this.state.useremail === '') {
       this.props.loginError(true);
     } else {
       this.props.loginError(false);

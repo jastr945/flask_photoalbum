@@ -32,7 +32,7 @@ class App extends Component {
   }
   addAlbum(event) {
     event.preventDefault();
-    if (this.state.loginErrorVisible == false) {
+    if (this.state.loginErrorVisible === false) {
       var formData = new FormData();
       for (let i=0; i < this.state.file.length; i++) {
         formData.append('photos', this.state.file[i]);
@@ -87,7 +87,7 @@ class App extends Component {
     var bg = require('./components/static/landscape.jpg');
     return (
       <div className="app">
-        <Header loginError={this.loginError.bind(this)} />
+        <Header loginError={this.loginError.bind(this)} getAlbums={this.getAlbums()} />
         <div className="jumbotron"  style ={{backgroundImage: "url("+bg+")"}} >
           <div className="jumbo container">
             {formOpened ? (
