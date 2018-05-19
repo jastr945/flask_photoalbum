@@ -7,6 +7,14 @@ svg {
   margin: 2em auto;
 }
 
+.empty {
+  text-align: center;
+  background-color: #f2d4c2;
+  margin: 4em auto;
+  border-radius: 10px;
+  font-size: 2em;
+}
+
 .albumSpace {
   width: auto;
   margin: 0 auto 1em auto;
@@ -25,6 +33,11 @@ svg {
 }
 
 @media screen and (max-width: 450px) {
+  .empty {
+    margin: 2em auto;
+    font-size: 1em;
+  }
+
   .albumSpace {
     margin: 0 auto 0.5em auto;
   }

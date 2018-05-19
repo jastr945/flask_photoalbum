@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Loading from './Loading';
 import './AlbumsList.css';
 import ImageRow from './ImageRow';
 
@@ -11,15 +10,9 @@ class AlbumsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
       albumID: -1,
       albumHovered: false
     }
-  }
-  componentDidMount() {
-    this.setState({
-      loading: false
-    });
   }
   albumHover(albumindex) {
     this.setState({
@@ -34,7 +27,8 @@ class AlbumsList extends React.Component {
   }
   render() {
     return (
-      this.state.loading ? <Loading /> :
+      <div>
+      {this.props.albums.length === 0 ? <div className="empty">You have no galleries yet.</div> :
       <div className="container albumSpace">
         {
           this.props.albums.map((album, albumindex) => {
@@ -60,6 +54,8 @@ class AlbumsList extends React.Component {
             )
           })
         }
+      </div>
+      }
       </div>
     )
   }
