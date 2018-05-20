@@ -200,10 +200,24 @@ def get_single_album(album_id):
         return jsonify(response_object), 404
 
 
-@albums_blueprint.route('/ping', methods=['GET'])
-def ping_pong():
-    """Just a test"""
-    return jsonify({
-        'status': 'success',
-        'message': 'kittykats!'
-    })
+@albums_blueprint.route('/albums/<album_id>', methods=['DELETE'])
+def delete_album(album_id):
+    """Deleting a single album"""
+    response_object = {
+        'status': 'fail',
+        'message': 'Album does not exist'
+    }
+    try:
+        album = Album.query.filter_by(id=int(album_id)).first()
+        if not album:
+            return jsonify(response_object), 404
+        else:
+            db.session.delete(album)
+            db.session.commit()
+            response_object = {
+                'status': 'success',
+                'message': 'Album was deleted successfully.'
+            }
+            return jsonify(response_object), 200
+    except ValueError:
+        return jsonify(response_object), 404
