@@ -200,15 +200,15 @@ def get_single_album(album_id):
         return jsonify(response_object), 404
 
 
-@albums_blueprint.route('/albums/<album_id>', methods=['DELETE'])
-def delete_album(album_id):
+@albums_blueprint.route('/albums/<album_title>', methods=['DELETE'])
+def delete_album(album_title):
     """Deleting a single album"""
     response_object = {
         'status': 'fail',
         'message': 'Album does not exist'
     }
     try:
-        album = Album.query.filter_by(id=int(album_id)).first()
+        album = Album.query.filter_by(title=str(album_title)).first()
         if not album:
             return jsonify(response_object), 404
         else:
