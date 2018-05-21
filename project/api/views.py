@@ -84,7 +84,7 @@ def authorized():
 def remove_user():
     """Google logout"""
     credentials = storage.get()
-    if credentials:
+    if credentials and len(credentials.id_token['email']) > 0:
         storage.delete()
         response_object = {
             'status': 'success',
@@ -99,7 +99,7 @@ def remove_user():
 @albums_blueprint.route('/albums', methods=['POST'])
 def add_album():
     credentials = storage.get()
-    if len(credentials.id_token['email']) > 0:
+    if credentials and len(credentials.id_token['email']) > 0:
         post_data = request.form
         if not post_data:
             response_object = {
@@ -179,7 +179,7 @@ def get_single_album(album_id):
     """Get single album details"""
     response_object = {
         'status': 'fail',
-        'message': 'Album does not exist'
+        'message': 'Album does not exist.'
     }
     try:
         album = Album.query.filter_by(id=int(album_id)).first()
@@ -204,7 +204,7 @@ def get_single_album(album_id):
 def delete_album(album_title):
     """Deleting a single album"""
     credentials = storage.get()
-    if len(credentials.id_token['email']) > 0:
+    if credentials and len(credentials.id_token['email']) > 0:
         try:
             album = Album.query.filter_by(title=str(album_title)).first()
             if not album:
