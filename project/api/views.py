@@ -203,21 +203,33 @@ def get_single_album(album_id):
 @albums_blueprint.route('/albums/<album_title>', methods=['DELETE'])
 def delete_album(album_title):
     """Deleting a single album"""
-    response_object = {
-        'status': 'fail',
-        'message': 'Album does not exist'
-    }
-    try:
-        album = Album.query.filter_by(title=str(album_title)).first()
-        if not album:
-            return jsonify(response_object), 404
-        else:
-            db.session.delete(album)
-            db.session.commit()
+    credentials = storage.get()
+    if len(credentials.id_token['email']) > 0:
+        try:
+            album = Album.query.filter_by(title=str(album_title)).first()
+            if not album:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'Album does not exist.'
+                }
+                return jsonify(response_object), 404
+            else:
+                db.session.delete(album)
+                db.session.commit()
+                response_object = {
+                    'status': 'success',
+                    'message': 'Album was deleted successfully.'
+                }
+                return jsonify(response_object), 200
+        except ValueError:
             response_object = {
-                'status': 'success',
-                'message': 'Album was deleted successfully.'
+                'status': 'fail',
+                'message': 'Something went wrong(value error).'
             }
-            return jsonify(response_object), 200
-    except ValueError:
-        return jsonify(response_object), 404
+            return jsonify(response_object), 404
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': 'Unauthorized access. Please log in.'
+        }
+        return jsonify(response_object), 403

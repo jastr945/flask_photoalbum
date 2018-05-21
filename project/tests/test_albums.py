@@ -2,12 +2,12 @@ import json
 
 from project.tests.base import BaseTestCase
 from project import db
-from project.api.models import Album
+from project.api.models import Album, Image
 import datetime
 
 
-def add_album(title, description, created_at=datetime.datetime.now()):
-    album = Album(title=title, description=description, created_at=created_at)
+def add_album(title, description, user_email, created_at=datetime.datetime.now()):
+    album = Album(title=title, description=description, user_email=user_email, created_at=created_at)
     db.session.add(album)
     db.session.commit()
     return album
@@ -17,12 +17,10 @@ class TestAlbumService(BaseTestCase):
     """Tests for the Albums Service."""
 
     def test_albums(self):
-        """Ensure the /ping route behaves correctly."""
-        response = self.client.get('/ping')
+        """Ensure the / route behaves correctly."""
+        response = self.client.get('/')
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn('kittykats!', data['message'])
-        self.assertIn('success', data['status'])
 
     def test_add_album(self):
         """Ensure a new album can be added to the database."""
