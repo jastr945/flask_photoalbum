@@ -14,6 +14,7 @@ class AlbumsList extends React.Component {
       albumID: -1,
       albumHovered: false
     }
+    this.handleDelete = this.handleDelete.bind(this);
   }
   albumHover(albumindex) {
     this.setState({
@@ -29,10 +30,12 @@ class AlbumsList extends React.Component {
   handleDelete(title) {
     if (window.confirm('Are you sure you wish to delete this album?')) {
       var url = 'http://slider.mee.how:5001/albums/' + title;
-      console.log(url);
       axios.delete(url)
-      .then((res) => { console.log(res); })
-      .catch((err) => { console.log(err); })
+      .then((res) => {
+        console.log(res.data.message);
+        this.props.callgetAlbums();
+      })
+      .catch((err) => { console.log(err); });
     }
   }
   render() {
