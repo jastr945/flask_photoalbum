@@ -28,14 +28,18 @@ class AlbumsList extends React.Component {
     });
   }
   handleDelete(title) {
-    if (window.confirm('Are you sure you wish to delete this album?')) {
-      var url = 'http://slider.mee.how:5001/albums/' + title;
-      axios.delete(url)
-      .then((res) => {
-        console.log(res.data.message);
-        this.props.callgetAlbums();
-      })
-      .catch((err) => { console.log(err); });
+    if (this.props.loginError === false) {
+      if (window.confirm('Are you sure you wish to delete this album?')) {
+        var url = 'http://slider.mee.how:5001/albums/' + title;
+        axios.delete(url)
+        .then((res) => {
+          console.log(res.data.message);
+          this.props.callgetAlbums();
+        })
+        .catch((err) => { console.log(err); });
+      }
+    } else if (this.props.loginError === true) {
+      this.props.openForm();
     }
   }
   render() {

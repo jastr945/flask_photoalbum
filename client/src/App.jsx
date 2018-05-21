@@ -106,7 +106,7 @@ class App extends Component {
           </div>
         </div>
         <div className="container">
-          <AlbumsList albums={this.state.albums} callgetAlbums={this.getAlbums.bind(this)} />
+          <AlbumsList albums={this.state.albums} callgetAlbums={this.getAlbums.bind(this)} loginError={this.state.loginErrorVisible} openForm={this.openForm.bind(this)}/>
         </div>
         <Footer />
       </div>
