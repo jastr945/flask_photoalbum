@@ -2,7 +2,8 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 1em;
+  padding-top: 2em;
+  padding-bottom: 1em;
   background-color: #222222;
   color: #f2d4c2;
 }
