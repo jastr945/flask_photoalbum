@@ -56,7 +56,7 @@ def seed_db():
     img21 = Image(name='21.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03654.JPG')
     img22 = Image(name='22.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03660.JPG')
 
-    album4 = Album(title='Portland Japanese Garden', description='Considered to be the most authentic Japanese Garden outside of Japan.', user_email='example@example.com')
+    album4 = Album(title='Portland Japanese Garden', description='This place is considered to be the most authentic Japanese Garden outside of Japan.', user_email='example@example.com')
     img23 = Image(name='23.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03668.JPG')
     img24 = Image(name='24.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03678.JPG')
     img25 = Image(name='25.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03688.JPG')
@@ -67,12 +67,14 @@ def seed_db():
     img28 = Image(name='28.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03236.JPG')
     img29 = Image(name='29.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03238.JPG')
     img30 = Image(name='30.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03239.JPG')
+    img31 = Image(name='31.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/bird.jpg')
+    img32 = Image(name='32.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/mt_hood.jpg')
 
     album1.images = [img1, img2, img3, img4]
     album2.images = [img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15]
     album3.images = [img16, img17, img18, img19, img20, img21, img22]
     album4.images = [img23, img24, img25]
-    album5.images = [img26, img27, img28, img29, img30]
+    album5.images = [img26, img27, img28, img29, img30, img31, img32]
 
     db.session.add(album1)
     db.session.add(album2)
