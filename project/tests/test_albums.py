@@ -25,6 +25,29 @@ def authorize():
 class TestAlbumService(BaseTestCase):
     """Tests for the Albums Service."""
 
+    def test_invalid_add_code(self):
+        """Ensure error is thrown if invalid access code is sent."""
+        with self.client:
+            response = self.client.post(
+                '/google',
+                data=json.dumps({"headers": {"Authorization": {}}}),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 400)
+            self.assertIn('Invalid payload.', data['message'])
+            self.assertIn('fail', data['status'])
+
+    def test_authorized_fail(self):
+        """Sending empty data if the user is not authorized."""
+        with self.client:
+            response = self.client.get('/googleauthorized')
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('', data['data']['email'])
+            self.assertIn('', data['data']['pic'])
+            self.assertIn('success', data['status'])
+
     def test_add_album_unauthorized(self):
         """Ensure error is thrown if the user is not authorized."""
         with self.client:
