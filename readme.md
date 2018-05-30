@@ -14,6 +14,16 @@ The app is powered by Flask REST API, React.js and PostgreSQL, which run in sepa
 
 ### Specific Functionality
 
+The environment consists of 3 services brought up by Docker Compose.
+
+#### Python-Flask Backend
+
+#### React.js Frontend
+
+#### Database
+
+PostgreSQL database runs in a separate container. The official Postgres image was extended by adding Flask-SQLAlchemy inside the `albums-service` container. 
+
 ### Run
 
 ```sh
@@ -25,5 +35,8 @@ The web service runs on port 9000.
 
 ```sh
   $ docker exec -it albums-service bash
+```
+Inside the container run:
+```sh
   $ python manage.py test
 ```
