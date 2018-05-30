@@ -12,7 +12,8 @@ class AlbumsList extends React.Component {
     super(props);
     this.state = {
       albumID: -1,
-      albumHovered: false
+      albumHovered: false,
+      loginErrorVisible: false
     }
     this.handleDelete = this.handleDelete.bind(this);
   }
@@ -40,6 +41,9 @@ class AlbumsList extends React.Component {
       }
     } else if (this.props.loginError === true) {
       this.props.openForm();
+      this.setState({
+        loginErrorVisible: true
+      });
     }
   }
   render() {
@@ -61,6 +65,7 @@ class AlbumsList extends React.Component {
                     <h6>{album.images.length} files - <Timestamp time={album.created_at} format='full' /> - <i><Timestamp time={album.created_at} format='ago' includeDay={true} precision={2} autoUpdate={60} /></i></h6>
                     <h5>{album.description}</h5>
                     <h6 className="delete" onClick={this.handleDelete.bind(this, album.title)}><u>delete</u></h6>
+                    {this.state.loginErrorVisible && <h6 className="delete-error">Please sign in to delete!</h6>}
                   </div>
                   <ImageRow
                   albums={this.props.albums}
