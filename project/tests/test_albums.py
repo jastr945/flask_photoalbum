@@ -38,7 +38,7 @@ class TestAlbumService(BaseTestCase):
             self.assertIn('Invalid payload.', data['message'])
             self.assertIn('fail', data['status'])
 
-    def test_authorized_fail(self):
+    def test_authorized_empty(self):
         """Sending empty data if the user is not authorized."""
         with self.client:
             response = self.client.get('/googleauthorized')
@@ -116,7 +116,7 @@ class TestAlbumService(BaseTestCase):
     #         self.assertIn('fail', data['status'])
     #
     def test_delete_album_unauthorized(self):
-        """Ensure error is thrown if the user is not authorized."""
+        """Ensure error is thrown if unauthorized user deletes album."""
         with self.client:
             response = self.client.delete('/albums/test')
             data = json.loads(response.data.decode())

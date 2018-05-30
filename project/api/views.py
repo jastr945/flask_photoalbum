@@ -17,7 +17,7 @@ CORS(app)
 app.config['UPLOADED_PHOTOS_DEST'] = 'static'
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
-patch_request_class(app, 32 * 1024 * 1024) # limits uploaded images to 32 megabytes
+patch_request_class(app, 32 * 1024 * 1024)  # limits uploaded images to 32 megabytes
 
 # creating a blueprint
 albums_blueprint = Blueprint('albums', __name__)
@@ -35,7 +35,7 @@ def index():
 @albums_blueprint.route('/google', methods=['POST'])
 def add_code():
     """Receiving the access code from the Client and storing it"""
-    access_code = json.loads(request.data)['headers']['Authorization'] # obtaining the access code from Client
+    access_code = json.loads(request.data)['headers']['Authorization']  # obtaining the access code from Client
     if not access_code:
         response_object = {
             'status': 'fail',
@@ -46,7 +46,7 @@ def add_code():
                                client_secret='WFVzMZNMObdCcc1WjD-ifALs',
                                scope='profile',
                                redirect_uri='http://slider.mee.how:9000')
-    credentials = flow.step2_exchange(access_code[7:]) # exchanging access code for token
+    credentials = flow.step2_exchange(access_code[7:])  # exchanging access code for token
     storage.put(credentials)
     response_object = {
         'status': 'success',
@@ -114,12 +114,12 @@ def add_album():
             if not album:
                 description = request.form['description']
                 new_album = Album(title=title, description=description, user_email=credentials.id_token['email'])
-                new_album.images=[]
+                new_album.images = []
                 for i in request.files.getlist('photos'):
-                    filename = photos.save(i) # saving images via Flask-Uploads
-                    img_url = photos.url(filename) # extracting image url with Flask-Uploads
+                    filename = photos.save(i)  # saving images via Flask-Uploads
+                    img_url = photos.url(filename)  # extracting image url with Flask-Uploads
                     new_image = Image(name=filename, url=img_url)
-                    new_album.images.append(new_image) # One-to-many relationship instantiation
+                    new_album.images.append(new_image)  # One-to-many relationship instantiation
                 db.session.add(new_album)
                 db.session.commit()
                 response_object = {
@@ -147,6 +147,7 @@ def add_album():
         }
         return jsonify(response_object), 403
 
+
 @albums_blueprint.route('/albums', methods=['GET'])
 def get_all_albums():
     """Get all albums"""
@@ -163,7 +164,7 @@ def get_all_albums():
             'description': album.description,
             'created_at': album.created_at.isoformat(),
             'user_email': album.user_email,
-            'images': [str(i.url) for i in album.images] # sending image url to React
+            'images': [str(i.url) for i in album.images]  # sending image url to React
         }
         albums_list.append(album_object)
     response_object = {
