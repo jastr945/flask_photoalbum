@@ -25,7 +25,8 @@ class AlbumsList extends React.Component {
   }
   albumMouseLeave() {
     this.setState({
-      albumHovered: false
+      albumHovered: false,
+      loginErrorVisible: false
     });
   }
   handleDelete(title) {

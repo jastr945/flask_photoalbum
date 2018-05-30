@@ -162,6 +162,7 @@ def get_all_albums():
             'title': album.title,
             'description': album.description,
             'created_at': album.created_at.isoformat(),
+            'user_email': album.user_email,
             'images': [str(i.url) for i in album.images] # sending image url to React
         }
         albums_list.append(album_object)
@@ -172,32 +173,6 @@ def get_all_albums():
         }
     }
     return jsonify(response_object), 200
-
-
-@albums_blueprint.route('/albums/<album_id>', methods=['GET'])
-def get_single_album(album_id):
-    """Get single album details"""
-    response_object = {
-        'status': 'fail',
-        'message': 'Album does not exist.'
-    }
-    try:
-        album = Album.query.filter_by(id=int(album_id)).first()
-        if not album:
-            return jsonify(response_object), 404
-        else:
-            response_object = {
-                'status': 'success',
-                'data': {
-                  'title': album.title,
-                  'description': album.description,
-                  'created_at': album.created_at.isoformat(),
-                  'images': [str(i.url) for i in album.images] # sending image url to React
-                }
-            }
-            return jsonify(response_object), 200
-    except ValueError:
-        return jsonify(response_object), 404
 
 
 @albums_blueprint.route('/albums/<album_title>', methods=['DELETE'])
