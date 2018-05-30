@@ -15,6 +15,7 @@ def add_album(title, description, user_email, created_at=datetime.datetime.now()
     db.session.commit()
     return album
 
+
 def authorize():
     # storage for Google access token
     storage = Storage('credentials_file')
