@@ -1,9 +1,9 @@
 import json
-
 from project.tests.base import BaseTestCase
 from project import db
 from project.api.models import Album, Image
 import datetime
+from oauth2client.file import Storage
 
 
 def add_album(title, description, user_email, created_at=datetime.datetime.now()):
@@ -15,37 +15,34 @@ def add_album(title, description, user_email, created_at=datetime.datetime.now()
     db.session.commit()
     return album
 
+def authorize():
+    # storage for Google access token
+    storage = Storage('credentials_file')
+    storage.put({"email": "example@example.com"})
+    return storage
+
 
 class TestAlbumService(BaseTestCase):
     """Tests for the Albums Service."""
 
-    def test_get_albums(self):
-        """Ensure the /albums route behaves correctly."""
+    def test_add_album_unauthorized(self):
+        """Ensure error is thrown if the user is not authorized."""
         with self.client:
-            f = open("credentials","w+")
-            f.write("example@example.com")
-            f.close()
-            response = self.client.get('/albums')
-            self.assertEqual(response.status_code, 200)
+            response = self.client.post(
+                '/albums',
+                data=json.dumps(dict(
+                    title='test',
+                    description='test album'
+                )),
+                content_type='application/json',
+            )
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 403)
+            self.assertIn('Unauthorized access. Please log in.', data['message'])
+            self.assertIn('fail', data['status'])
 
-    # def test_add_album(self):
-    #     """Ensure a new album can be added to the database."""
-    #     with self.client:
-    #         response = self.client.post(
-    #             '/albums',
-    #             data=json.dumps(dict(
-    #                 title='jastr945',
-    #                 description='my album'
-    #             )),
-    #             content_type='application/json',
-    #         )
-    #         data = json.loads(response.data.decode())
-    #         self.assertEqual(response.status_code, 201)
-    #         self.assertIn('jastr945 was added!', data['message'])
-    #         self.assertIn('success', data['status'])
-    #
     # def test_add_album_invalid_json(self):
-    #     """Ensure error is thrown if the JSON object is empty."""
+    #     """Ensure error is thrown if the JSON object is empty.""" # authorization required
     #     with self.client:
     #         response = self.client.post(
     #             '/albums',
@@ -56,7 +53,7 @@ class TestAlbumService(BaseTestCase):
     #         self.assertEqual(response.status_code, 400)
     #         self.assertIn('Invalid payload.', data['message'])
     #         self.assertIn('fail', data['status'])
-    #
+    # #
     # def test_add_album_invalid_json_keys(self):
     #     """Ensure error is thrown if the JSON object does not have a title key."""
     #     with self.client:
@@ -95,23 +92,24 @@ class TestAlbumService(BaseTestCase):
     #             'Sorry. That album already exists.', data['message'])
     #         self.assertIn('fail', data['status'])
     #
-    def test_single_album_no_id(self):
-        """Ensure error is thrown if an id is not provided."""
+    def test_delete_album_unauthorized(self):
+        """Ensure error is thrown if the user is not authorized."""
         with self.client:
-            response = self.client.get('/albums/test')
+            response = self.client.delete('/albums/test')
             data = json.loads(response.data.decode())
-            self.assertEqual(response.status_code, 404)
-            self.assertIn('Album does not exist.', data['message'])
+            self.assertEqual(response.status_code, 403)
+            self.assertIn('Unauthorized access. Please log in.', data['message'])
             self.assertIn('fail', data['status'])
 
-    def test_single_album_incorrect_id(self):
-        """Ensure error is thrown if the id does not exist."""
-        with self.client:
-            response = self.client.get('/albums/999')
-            data = json.loads(response.data.decode())
-            self.assertEqual(response.status_code, 404)
-            self.assertIn('Album does not exist.', data['message'])
-            self.assertIn('fail', data['status'])
+    # def test_delete_nonexistent_album(self):
+    #     """Ensure error is thrown if the title does not exist."""
+    #     add_album('pofi', 'cats album', 'example@example.com')
+    #     with self.client:
+    #         response = self.client.delete('/albums/pofi1')
+    #         data = json.loads(response.data.decode())
+    #         self.assertEqual(response.status_code, 404)
+    #         self.assertIn('Album does not exist.', data['message'])
+    #         self.assertIn('fail', data['status'])
 
     def test_get_all_albums(self):
         """Ensure get all albums behaves correctly."""
