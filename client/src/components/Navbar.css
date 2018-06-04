@@ -18,16 +18,8 @@
   font-size: 1.5em;
 }
 
-.navbar-right > li > a {
-  padding: 0.9em 0.3em;
-}
-
 .userinfo {
-  margin: 0 0.5em;
-}
-
-.userinfo > h4 {
-  font-size: 1em;
+  padding: 7px;
 }
 
 .googleButton {
@@ -43,7 +35,7 @@
   border-color: #c06046;
 }
 
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1200px) {
   .navbar-brand {
     font-size: 1.5em;
   }
@@ -52,16 +44,12 @@
     font-size: 1em;
   }
 
-  .navbar-right > li > a {
-    padding: 1.3em 0.3em;
-  }
-
   .googleButton {
     margin: 1em 0.5em;
   }
 }
 
-@media screen and (max-width: 756px) {
+@media screen and (max-width: 950px) {
   .navbar {
     padding: 0.2em 0.5em 0.2em 0em;
   }
@@ -73,16 +61,10 @@
   }
 
   .navbar-right {
-    font-size: 1.1em;
-  }
-
-  .navbar-right > li > a {
-    padding: 0.5em;
-  }
-
-  .userinfo > h4 {
     font-size: 1em;
-    margin-top: 0;
-    margin-bottom: 0;
+  }
+
+  .userinfo {
+    font-size: 0.8em;
   }
 }

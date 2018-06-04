@@ -92,13 +92,12 @@ class Header extends Component {
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}
               offline={true}
-              approvalPrompt="force"
               responseType="code"
               prompt="consent"
               isSignedIn
               style={{}}
             />}
-            {this.state.useremail && <li className="userinfo"><h4>{this.state.useremail} | <img src={this.state.userpic} alt="userpic" height="35px" width="35px"/></h4></li>}
+            {this.state.useremail && <li className="userinfo">{this.state.useremail} | <img src={this.state.userpic} alt="userpic" height="35px" width="35px"/></li>}
             {this.state.useremail &&
               <li><GoogleLogout className="googleButton" buttonText="Logout" onLogoutSuccess={this.logout} style={{}}/></li>}
           </Nav>
