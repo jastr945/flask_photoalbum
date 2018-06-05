@@ -28,13 +28,13 @@ def test():
 @manager.command
 def seed_db():
     """Seeds the database."""
-    album1 = Album(title='Columbia River Gorge', description='The Columbia River Gorge is a canyon of the Columbia River in the Pacific Northwest of the United States.', user_email='example@example.com')
+    album1 = Album(title='Example Gallery: Columbia River Gorge', description='The Columbia River Gorge is a canyon of the Columbia River in the Pacific Northwest of the United States.', user_email='example@example.com')
     img1 = Image(name='1.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Columbia_River_Gorge/DSC03751.JPG')
     img2 = Image(name='2.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Columbia_River_Gorge/DSC03754.JPG')
     img3 = Image(name='3.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Columbia_River_Gorge/DSC03755.JPG')
     img4 = Image(name='4.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Columbia_River_Gorge/DSC03756.JPG')
 
-    album2 = Album(title='Crystal Springs Rhododendron Garden', description='Beautiful rhododendron garden in gorgeous Southeast Portland!', user_email="example@example.com")
+    album2 = Album(title='Example Gallery: Crystal Springs Rhododendron Garden', description='Beautiful rhododendron garden in gorgeous Southeast Portland!', user_email="example@example.com")
     img5 = Image(name='5.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Crystal_Springs_Rhododendron_Garden/DSC03714.JPG')
     img6 = Image(name='6.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Crystal_Springs_Rhododendron_Garden/DSC03715.JPG')
     img7 = Image(name='7.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Crystal_Springs_Rhododendron_Garden/DSC03719.JPG')
@@ -47,7 +47,7 @@ def seed_db():
     img14 = Image(name='14.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Crystal_Springs_Rhododendron_Garden/DSC03745.JPG')
     img15 = Image(name='15.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Crystal_Springs_Rhododendron_Garden/DSC03746.JPG')
 
-    album3 = Album(title='Magnolia Trail in the Washington Park', description='Hoyt Arboretum, Portland, Oregon. Spring 2018.', user_email='example@example.com')
+    album3 = Album(title='Example Gallery: Magnolia Trail in the Washington Park', description='Hoyt Arboretum, Portland, Oregon. Spring 2018.', user_email='example@example.com')
     img16 = Image(name='16.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03639.JPG')
     img17 = Image(name='17.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03642.JPG')
     img18 = Image(name='18.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03643.JPG')
@@ -56,12 +56,12 @@ def seed_db():
     img21 = Image(name='21.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03654.JPG')
     img22 = Image(name='22.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Magnolia_Trail_in_the_Washington_Park/DSC03660.JPG')
 
-    album4 = Album(title='Portland Japanese Garden', description='This place is considered to be the most authentic Japanese Garden outside of Japan.', user_email='example@example.com')
+    album4 = Album(title='Example Gallery: Portland Japanese Garden', description='This place is considered to be the most authentic Japanese Garden outside of Japan.', user_email='example@example.com')
     img23 = Image(name='23.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03668.JPG')
     img24 = Image(name='24.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03678.JPG')
     img25 = Image(name='25.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Japanese_Garden/DSC03688.JPG')
 
-    album5 = Album(title='The Mt. Hood National Forest', description='The Mt. Hood National Forest is 20 miles away from Portland.', user_email='example@example.com')
+    album5 = Album(title='Example Gallery: The Mt. Hood National Forest', description='The Mt. Hood National Forest is 20 miles away from Portland.', user_email='example@example.com')
     img26 = Image(name='26.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03233.JPG')
     img27 = Image(name='27.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03234.JPG')
     img28 = Image(name='28.jpg', url='https://raw.githubusercontent.com/jastr945/xperiments/master/flask-photoalbum/sample_albums/Mount_Hood/DSC03236.JPG')

@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 ADD . /usr/src/app
 
-CMD python3 manage.py runserver -h 0.0.0.0
+CMD ["./entrypoint-prod.sh"]

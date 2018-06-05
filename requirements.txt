@@ -7,3 +7,4 @@ flask-uploads
 oauth2client
 ipdb
 flask-cors
+gunicorn
