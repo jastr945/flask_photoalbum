@@ -17,7 +17,7 @@ services:
     container_name: albums-service
     build: .
     ports:
-      - 5001:5000
+      - 5001
     environment:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_dev
@@ -42,4 +42,13 @@ services:
       albums-service:
         condition: service_started
     links:
+      - albums-service
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
       - albums-service

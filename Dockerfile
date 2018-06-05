@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 ADD . /usr/src/app
 
-CMD ["./entrypoint-prod.sh"]
+CMD ["./entrypoint.sh"]
