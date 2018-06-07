@@ -32,7 +32,7 @@ class AlbumsList extends React.Component {
   handleDelete(title) {
     if (this.props.loginError === false) {
       if (window.confirm('Are you sure you wish to delete this album?')) {
-        var url = 'http://slider.mee.how:5001/albums/' + title;
+        var url = 'http://slider.mee.how:5000/albums/' + title;
         axios.delete(url)
         .then((res) => {
           console.log(res.data.message);

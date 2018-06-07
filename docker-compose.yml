@@ -16,8 +16,8 @@ services:
   albums-service:
     container_name: albums-service
     build: .
-    expose:
-      - '5000'
+    ports:
+      - '5000:5001'
     environment:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_dev

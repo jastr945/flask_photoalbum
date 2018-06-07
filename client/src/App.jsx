@@ -26,7 +26,7 @@ class App extends Component {
     this.getAlbums();
   }
   getAlbums() {
-    axios.get('http://slider.mee.how:5001/albums')
+    axios.get('http://slider.mee.how:5000/albums')
     .then((res) => { this.setState({ albums: res.data.data.albums }); })
     .catch((err) => { console.log(err); })
   }
@@ -44,7 +44,7 @@ class App extends Component {
           'Content-Type': 'multipart/form-data'
         }
       }
-      axios.post('http://slider.mee.how:5001/albums', formData, config)
+      axios.post('http://slider.mee.how:5000/albums', formData, config)
       .then((res) => {
         this.getAlbums();
         this.setState({ title: '', description: '', file: null });

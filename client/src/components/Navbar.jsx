@@ -21,7 +21,7 @@ class Header extends Component {
     this.getUsers();
   }
   getUsers() {
-    axios.get('http://slider.mee.how:5001/googleauthorized')
+    axios.get('http://slider.mee.how:5000/googleauthorized')
     .then((res) => {
     this.setState({
       useremail: res.data.data.email,
@@ -46,7 +46,7 @@ class Header extends Component {
       }
     }
     console.log(config2);
-    axios.post('http://slider.mee.how:5001/google', config2)
+    axios.post('http://slider.mee.how:5000/google', config2)
     .then((res) => {
       console.log('access code sent');
       this.getUsers();
@@ -56,7 +56,7 @@ class Header extends Component {
     });
   }
   logout = () => {
-    axios.get('http://slider.mee.how:5001/googlelogout')
+    axios.get('http://slider.mee.how:5000/googlelogout')
     .then((res) => {
       this.getUsers();
     })
