@@ -6,7 +6,7 @@ services:
     container_name: albums-db
     build: ./project/db
     ports:
-        - 5435:5432
+        - '5435:5432'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -16,8 +16,8 @@ services:
   albums-service:
     container_name: albums-service
     build: .
-    ports:
-      - 5001
+    expose:
+      - '5000'
     environment:
       - APP_SETTINGS=project.config.DevelopmentConfig
       - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_dev
@@ -49,6 +49,6 @@ services:
     build: ./nginx
     restart: always
     ports:
-      - 80:80
+      - '80:80'
     depends_on:
       - albums-service
