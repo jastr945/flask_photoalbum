@@ -8,8 +8,8 @@ services:
     ports:
         - '5435:5432'
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     healthcheck:
       test: exit 0
 
@@ -19,10 +19,10 @@ services:
     ports:
       - '5000:5001'
     environment:
-      - APP_SETTINGS=project.config.ProductionConfig
-      - SECRET_KEY=my_precious
-      - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_prod
-      - DATABASE_TEST_URL=postgres://postgres:postgres@albums-db:5432/albums_test
+      - APP_SETTINGS=${APP_SETTINGS}
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_TEST_URL=${DATABASE_TEST_URL}
     depends_on:
       albums-db:
         condition: service_healthy
