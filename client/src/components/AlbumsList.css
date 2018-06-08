@@ -56,6 +56,10 @@ svg {
     padding: 0 1em;
   }
 
+  .header > h2 {
+    font-size: 1.2em;
+  }
+
   .container {
     padding: 0.2em 0.2em 0 0.2em;
   }

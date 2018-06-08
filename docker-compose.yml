@@ -19,8 +19,9 @@ services:
     ports:
       - '5000:5001'
     environment:
-      - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_dev
+      - APP_SETTINGS=project.config.ProductionConfig
+      - SECRET_KEY=my_precious
+      - DATABASE_URL=postgres://postgres:postgres@albums-db:5432/albums_prod
       - DATABASE_TEST_URL=postgres://postgres:postgres@albums-db:5432/albums_test
     depends_on:
       albums-db:
@@ -32,8 +33,6 @@ services:
     container_name: web-service
     build:
       context: ./client
-      args:
-        - NODE_ENV=development
     volumes:
       - './client/:/usr/src/app/flask-photoalbum'
     ports:

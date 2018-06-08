@@ -18,7 +18,7 @@ class App extends Component {
       description: '',
       file: null,
       formOpened: false,
-      loginErrorVisible: null
+      loginErrorVisible: true
     }
     this.openForm = this.openForm.bind(this);
   }
@@ -26,7 +26,7 @@ class App extends Component {
     this.getAlbums();
   }
   getAlbums() {
-    axios.get('http://slider.mee.how:5000/albums')
+    axios.get('http://192.168.0.107:5000/albums')
     .then((res) => { this.setState({ albums: res.data.data.albums }); })
     .catch((err) => { console.log(err); })
   }
