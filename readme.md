@@ -24,7 +24,7 @@ The environment consists of ***3 microservices*** brought up by ***Docker Compos
 
 #### React.js Frontend
 
-- Image sliders created from scratch in a loop (map function);
+- Image sliders created from scratch and displayed in a loop (map function);
 - One image at a time can be expanded for a full-screen view;
 - Multiple images can be selected and sent to the server at once;
 - Each album has a time stamp, showing how long ago it was created;
@@ -33,6 +33,10 @@ The environment consists of ***3 microservices*** brought up by ***Docker Compos
 #### Database
 
 PostgreSQL database runs in a separate container. The official Postgres image was extended by adding Flask-SQLAlchemy inside the `albums-service` container.
+
+#### HTTP server
+
+Nginx + Gunicorn. Nginx runs in a separate container.
 
 ### Run
 
