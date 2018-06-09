@@ -14,7 +14,7 @@ The app is powered by Flask REST API, React.js and PostgreSQL, which run in sepa
 
 ### Specific Functionality
 
-The environment consists of ***3 microservices*** brought up by ***Docker Compose***.
+The environment consists of ***4 microservices*** brought up by ***Docker Compose***.
 
 #### Python-Flask Backend
 
