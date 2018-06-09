@@ -37,7 +37,7 @@ PostgreSQL database runs in a separate container. The official Postgres image wa
 ### Run
 
 ```sh
-  $ docker-compose up --build -d
+  $ bash ./photoalbum.sh
 ```
 The web service runs on port 9000.
 
