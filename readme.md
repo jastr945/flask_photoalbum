@@ -36,7 +36,7 @@ PostgreSQL database runs in a separate container. The official Postgres image wa
 
 #### HTTP server
 
-Nginx + Gunicorn. Nginx runs in a separate container.
+Nginx + Gunicorn are used for this project. Nginx runs in a separate container.
 
 ### Run
 
