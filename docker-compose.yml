@@ -4,9 +4,11 @@ services:
 
   albums-db:
     container_name: albums-db
-    build: ./project/db
+    build: ./server/project/db
+    volumes:
+      - './server/project/db/:/usr/src/app/server/project/db'
     ports:
-        - '5435:5432'
+      - '5435:5432'
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -15,7 +17,7 @@ services:
 
   albums-service:
     container_name: albums-service
-    build: .
+    build: ./server
     ports:
       - '5000:5001'
     environment:
