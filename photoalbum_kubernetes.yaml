@@ -133,7 +133,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 9000
+  - port: 80
     targetPort: 9000
     protocol: TCP
   selector:
@@ -161,12 +161,12 @@ spec:
         ports:
           - containerPort: 80
         volumeMounts:
-          - name: nginx-config
+          - name: nginx-conf
             mountPath: /etc/nginx/conf.d
       volumes:
-      - name: nginx-config
+      - name: nginx-conf
         configMap:
-          name: nginx-config
+          name: nginx-conf
 
 ---
 apiVersion: v1
