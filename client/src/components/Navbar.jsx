@@ -76,7 +76,7 @@ class Header extends Component {
       <Navbar inverse fluid className="navbar" toggleable="lg">
         <Navbar.Header>
           <Navbar.Brand className="navbar-brand">
-            <a href="http://slider.mee.how:9000">React + Flask Photo Album</a>
+            <a href={process.env.REACT_APP_REDIRECT_URI}>React + Flask Photo Album</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -87,7 +87,7 @@ class Header extends Component {
             {!this.state.useremail &&
             <GoogleLogin
               className="googleButton"
-              clientId="418257197191-75oafj28gkn84pj7ebgvt54av0vtt7br.apps.googleusercontent.com"
+              clientId={process.env.REACT_APP_CLIENT_ID}
               buttonText="Login with Google"
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}

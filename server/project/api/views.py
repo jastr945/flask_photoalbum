@@ -1,11 +1,12 @@
+import os
+import json
+import datetime
 from flask import Flask, jsonify, Blueprint, request, render_template, redirect, session, url_for
 from project.api.models import Album, Image
 from project import db
 from sqlalchemy import exc
-import datetime
 from flask_uploads import UploadSet, IMAGES, configure_uploads, patch_request_class
 from flask_cors import CORS
-import json
 from urllib.request import urlopen
 from oauth2client.client import OAuth2WebServerFlow
 from oauth2client.file import Storage
@@ -42,10 +43,10 @@ def add_code():
             'message': 'Invalid payload.'
         }
         return jsonify(response_object), 400
-    flow = OAuth2WebServerFlow(client_id='418257197191-75oafj28gkn84pj7ebgvt54av0vtt7br.apps.googleusercontent.com',
-                               client_secret='WFVzMZNMObdCcc1WjD-ifALs',
+    flow = OAuth2WebServerFlow(client_id=os.environ.get('REACT_APP_CLIENT_ID'),
+                               client_secret=os.environ.get('CLIENT_SECRET'),
                                scope='profile',
-                               redirect_uri='http://slider.mee.how:9000')
+                               redirect_uri=os.environ.get('REACT_APP_REDIRECT_URI'))
     credentials = flow.step2_exchange(access_code[7:])  # exchanging access code for token
     storage.put(credentials)
     response_object = {

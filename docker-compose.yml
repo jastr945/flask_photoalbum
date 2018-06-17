@@ -25,6 +25,9 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_URL=${DATABASE_URL}
       - DATABASE_TEST_URL=${DATABASE_TEST_URL}
+      - REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - REACT_APP_CLIENT_ID=${REACT_APP_CLIENT_ID}
     depends_on:
       albums-db:
         condition: service_healthy
@@ -35,8 +38,9 @@ services:
     container_name: web-service
     build:
       context: ./client
-    volumes:
-      - './client/:/usr/src/app/flask-photoalbum'
+      args:
+        - REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}
+        - REACT_APP_CLIENT_ID=${REACT_APP_CLIENT_ID}
     ports:
       - '9000:9000'
     depends_on:

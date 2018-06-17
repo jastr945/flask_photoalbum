@@ -7,7 +7,7 @@ const Footer = (props) => {
     <footer>
       <div className="footer container">
         <ul>
-          <li><a href="http://slider.mee.how:9000" target="_blank" rel="noopener noreferrer">photo album</a></li>
+          <li><a href={process.env.REACT_APP_REDIRECT_URI} target="_blank" rel="noopener noreferrer">photo album</a></li>
           <li><a href="https://github.com/jastr945/flask_photoalbum" target="_blank" rel="noopener noreferrer">about</a></li>
           <li><a href="http://polina.mee.how/" target="_blank" rel="noopener noreferrer">contact</a></li>
         </ul>
