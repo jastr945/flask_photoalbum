@@ -42,7 +42,7 @@ services:
         - REACT_APP_REDIRECT_URI=${REACT_APP_REDIRECT_URI}
         - REACT_APP_CLIENT_ID=${REACT_APP_CLIENT_ID}
     ports:
-      - '9000:9000'
+      - '9000:80'
     depends_on:
       albums-service:
         condition: service_started
@@ -57,3 +57,4 @@ services:
       - '80:80'
     depends_on:
       - albums-service
+      - web-service

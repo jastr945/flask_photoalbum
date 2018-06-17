@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:latest as builder
 
 # set working directory
 RUN mkdir /usr/src/app
@@ -32,4 +32,7 @@ ADD . /usr/src/app
 RUN npm run build
 
 # start app
-CMD ["pushstate-server", "build"]
+FROM nginx
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
