@@ -89,6 +89,21 @@ spec:
               secretKeyRef:
                 name: flasksecret
                 key: db_test_url
+          - name: REACT_APP_REDIRECT_URI
+            valueFrom:
+              secretKeyRef:
+                name: flasksecret
+                key: redirect_uri
+          - name: CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: flasksecret
+                key: client_secret
+          - name: REACT_APP_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: flasksecret
+                key: client_id
         ports:
           - containerPort: 5000
 
@@ -127,6 +142,18 @@ spec:
       - name: web-service
         image: jastr945/photoalbum:react
         imagePullPolicy: Always
+        env:
+          - name: REACT_APP_REDIRECT_URI
+            valueFrom:
+              secretKeyRef:
+                name: flasksecret
+                key: redirect_uri
+          - name: REACT_APP_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: flasksecret
+                key: client_id
+        args: ["$(REACT_APP_REDIRECT_URI)", "$(REACT_APP_CLIENT_ID)"]
         ports:
           - containerPort: 9000
 
