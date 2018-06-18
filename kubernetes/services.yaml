@@ -21,8 +21,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 5001
-    targetPort: 5001
+  - port: 5000
+    targetPort: 5000
     protocol: TCP
   selector:
     app: flask
@@ -38,7 +38,23 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 9000
+    targetPort: 80
     protocol: TCP
   selector:
     app: react
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: nginx

@@ -110,7 +110,7 @@ spec:
     spec:
       containers:
       - name: web-service
-        image: jastr945/photoalbum:react-test
+        image: jastr945/photoalbum:react
         imagePullPolicy: Always
         env:
           - name: REACT_APP_REDIRECT_URI
@@ -124,4 +124,63 @@ spec:
                 name: flasksecret
                 key: client_id
         ports:
-          - containerPort: 9000
+          - containerPort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: jastr945/photoalbum:nginx
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        volumeMounts:
+          - name: nginx-conf
+            mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+
+---
+apiVersion: v1
+data:
+  prod.conf: |
+    server {
+
+      listen 80;
+
+      location / {
+        proxy_pass        http://react:80;
+        proxy_redirect    default;
+        proxy_set_header  Host $host;
+        proxy_set_header  X-Real-IP $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header  X-Forwarded-Host $server_name;
+      }
+
+      location /albums {
+         proxy_pass        http://flask:5000;
+         proxy_redirect    default;
+         proxy_set_header  Host $host;
+         proxy_set_header  X-Real-IP $remote_addr;
+         proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+         proxy_set_header  X-Forwarded-Host $server_name;
+       }
+    }
+kind: ConfigMap
+metadata:
+  name: nginx-conf
