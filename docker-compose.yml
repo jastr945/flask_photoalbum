@@ -19,7 +19,7 @@ services:
     container_name: albums-service
     build: ./server
     ports:
-      - '5000:5001'
+      - '5000:5000'
     environment:
       - APP_SETTINGS=${APP_SETTINGS}
       - SECRET_KEY=${SECRET_KEY}
