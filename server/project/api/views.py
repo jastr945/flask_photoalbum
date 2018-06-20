@@ -43,10 +43,10 @@ def add_code():
             'message': 'Invalid payload.'
         }
         return jsonify(response_object), 400
-    flow = OAuth2WebServerFlow(client_id=os.environ.get('REACT_APP_CLIENT_ID'),
-                               client_secret=os.environ.get('CLIENT_SECRET'),
+    flow = OAuth2WebServerFlow(client_id=str(os.environ.get('REACT_APP_CLIENT_ID')).strip(),
+                               client_secret=str(os.environ.get('CLIENT_SECRET')).strip(),
                                scope='profile',
-                               redirect_uri=os.environ.get('REACT_APP_REDIRECT_URI'))
+                               redirect_uri=str(os.environ.get('REACT_APP_REDIRECT_URI')).strip())
     credentials = flow.step2_exchange(access_code[7:])  # exchanging access code for token
     storage.put(credentials)
     response_object = {
