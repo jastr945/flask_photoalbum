@@ -10,7 +10,7 @@ The app is powered by Flask REST API, React.js and PostgreSQL, which run in sepa
 
 ### Demo
 
-[Work in progress...]
+http://gallery.mee.how/ (currently runs in Kubernetes on Microsoft Azure)
 
 ### Specific Functionality
 
