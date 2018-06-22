@@ -162,6 +162,7 @@ data:
     server {
 
       listen 80;
+      server_name gallery.mee.how;
 
       location / {
         proxy_pass        http://react:80;
@@ -171,8 +172,14 @@ data:
         proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header  X-Forwarded-Host $server_name;
       }
+    }
 
-      location /albums {
+    server {
+
+      listen 5000;
+      server_name slider.mee.how;
+
+      location /(.+) {
         proxy_pass        http://flask:5000;
         proxy_redirect    default;
         proxy_set_header  Host $host;

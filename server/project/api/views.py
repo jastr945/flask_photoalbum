@@ -87,13 +87,13 @@ def remove_user():
     credentials = storage.get()
     if credentials and len(credentials.id_token['email']) > 0:
         storage.delete()
-        response_object = {
-            'status': 'success',
-            'data': {
-                'email': '',
-                'pic': ''
-            }
+    response_object = {
+        'status': 'success',
+        'data': {
+            'email': '',
+            'pic': ''
         }
+    }
     return jsonify(response_object), 200
 
 
