@@ -84,9 +84,7 @@ def authorized():
 @albums_blueprint.route('/googlelogout', methods=['GET'])
 def remove_user():
     """Google logout"""
-    credentials = storage.get()
-    if credentials and len(credentials.id_token['email']) > 0:
-        storage.delete()
+    storage.delete()
     response_object = {
         'status': 'success',
         'data': {

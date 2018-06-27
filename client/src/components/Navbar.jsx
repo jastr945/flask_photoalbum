@@ -33,7 +33,6 @@ class Header extends Component {
     .catch((err) => { console.log(err); })
   }
   responseGoogle = (response) => {
-    console.log("login", response);
     var accessCode = response.code;
     const config2 = {
       headers: {
@@ -45,11 +44,11 @@ class Header extends Component {
         'mode': 'no-cors'
       }
     }
-    console.log(config2);
     axios.post('http://slider.mee.how:5000/google', config2)
     .then((res) => {
-      console.log('access code sent');
+      console.log('Access code sent.');
       this.getUsers();
+      console.log("Login successful.");
     })
     .catch((err) => {
       console.log(err);
@@ -58,7 +57,12 @@ class Header extends Component {
   logout = () => {
     axios.get('http://slider.mee.how:5000/googlelogout')
     .then((res) => {
+      this.setState({
+        useremail: null,
+        userpic: null
+      });
       this.getUsers();
+      console.log("Logout successful.")
     })
     .catch((err) => {
       console.log(err);
@@ -72,6 +76,7 @@ class Header extends Component {
     }
   }
   render() {
+    console.log(this.state.useremail);
     return (
       <Navbar inverse fluid className="navbar" toggleable="lg">
         <Navbar.Header>
